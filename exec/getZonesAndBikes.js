@@ -59,16 +59,16 @@ async function getVehiclesAndZones( data, token, cookie ) {
         Cookie: cookie
       },
     } );
-    const res = await response.json();
+    const res = await response.text();
     console.log( 'Am datele in get zones' )
     try {
       // writeToRespFile(res.data)
       // updateCookie( res.headers[ 'set-cookie' ][ 1 ] )
-      const bikes = res.data.attributes.bikes
+      // const bikes = res.data.attributes.bikes
       console.log( `THIS IS THE VARIABLE D U FUCK` )
       console.log( res )
-      console.log( bikes )
-      sortare( bikes, data.user_latitude, data.user_longitude )
+      // console.log( bikes )
+      // sortare( bikes, data.user_latitude, data.user_longitude )
       // bikesArray = bikes
       return new Promise( ( resolve ) => {
         resolve( bikes )

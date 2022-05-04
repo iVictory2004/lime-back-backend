@@ -27,8 +27,8 @@ const handler = async ( req, res ) => {
     if ( req.query.lat && req.query.lng )
         try {
             const bikes = await getClosestBikes( req.query.lat, req.query.lng )
+            // res.json( bikes )
             console.log( bikes )
-            res.json( bikes )
         } catch ( e ) {
             console.log( e )
         }
