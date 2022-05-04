@@ -53,6 +53,7 @@ async function getVehiclesAndZones( data, token, cookie ) {
     const response = await fetch( baseurl + map + string, {
       method: 'get',
       headers: {
+        'X-Requested-With': 'XMLHttpRequest',
         'content-type': 'application/json',
         Authorization: token,
         Cookie: cookie
@@ -62,7 +63,7 @@ async function getVehiclesAndZones( data, token, cookie ) {
     console.log( 'Am datele in get zones' )
     try {
       // writeToRespFile(res.data)
-      updateCookie( res.headers[ 'set-cookie' ][ 1 ] )
+      // updateCookie( res.headers[ 'set-cookie' ][ 1 ] )
       const bikes = res.data.attributes.bikes
       console.log( `THIS IS THE VARIABLE D U FUCK` )
       console.log( res )
