@@ -1,6 +1,12 @@
-const axios = require( 'axios' )
-const mapData = require( '../data/data.json' )
+// const axios = require( 'axios' )
+const fetch = ( ...args ) =>
+  import( 'node-fetch' ).then( ( {
+    default: fetch
+  } ) => fetch( ...args ) );
 
+// const fetch = require( 'node-fetch' )
+const mapData = require( '../data/data.json' )
+const https = require( 'https' );
 const fs = require( 'fs' )
 const readline = require( 'readline' )
 const rl = readline.createInterface( {
@@ -22,39 +28,58 @@ const {
 } = require( 'express/lib/utils' )
 const {
   response
-} = require( 'express' )
+} = require( 'express' );
+const {
+  on
+} = require( 'events' );
+const {
+  resolve
+} = require( 'path' );
 
-const baseurl = 'https://web-production.lime.bike/api/rider/'
-const map = 'v1/views/map'
+const baseurl = 'https://web-production.lime.bike/api/rider'
+const map = '/v1/views/map'
 
 async function getVehiclesAndZones( data, token, cookie ) {
+  let bikesArray = []
+  console.log( `the data is` )
+  console.log( data )
+  let string = `?`
+  for ( let [ key, value ] of Object.entries( data ) ) {
+    string += `${key}=${value}&`
+  }
+  string = string.slice( 0, -1 )
+  console.log( string )
   try {
-    const res = await axios( {
+    const response = await fetch( baseurl + map + string, {
       method: 'get',
-      baseURL: baseurl,
-      url: map,
       headers: {
         'content-type': 'application/json',
         Authorization: token,
         Cookie: cookie
       },
-      params: data
-    } )
+    } );
+    const res = await response.json();
     console.log( 'Am datele in get zones' )
     try {
       // writeToRespFile(res.data)
       // updateCookie( res.headers[ 'set-cookie' ][ 1 ] )
-      const bikes = res.data.data.attributes.bikes
+      const bikes = res.data.attributes.bikes
+      console.log( `THIS IS THE VARIABLE D U FUCK` )
+      console.log( res )
+      console.log( bikes )
       sortare( bikes, data.user_latitude, data.user_longitude )
-      return bikes
+      // bikesArray = bikes
+      return new Promise( ( resolve ) => {
+        resolve( bikes )
+      } )
     } catch ( e ) {
       console.log( `eroare in get zones la sortare sau scriere in fiesiere`, e )
     }
-    console.log( res.data.data.attributes.bikes )
-    console.log( {
-      ...res,
-      data: 'gol lol'
-    } )
+    // console.log( res.data.data.attributes.bikes )
+    // console.log( {
+    //   ...res,
+    //   data: 'gol lol'
+    // } )
   } catch ( err ) {
     console.log( `Ceva nu-i ok in get zones` )
     console.log( err )

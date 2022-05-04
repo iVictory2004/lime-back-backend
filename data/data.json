@@ -1,1 +1,9 @@
-{"user_latitude":"44.1913926","user_longitude":"28.6474458","ne_lat":"44.19139260.003","ne_lng":"28.64744580.003","sw_lat":44.1883926,"sw_lng":28.6444458,"zoom":"16"}
+{
+    "user_latitude": 44.1913926,
+    "user_longitude": 28.6474458,
+    "ne_lat": 0,
+    "ne_lng": 0,
+    "sw_lat": 0,
+    "sw_lng": 0,
+    "zoom": "16"
+}
