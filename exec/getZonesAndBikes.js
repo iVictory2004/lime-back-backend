@@ -18,11 +18,11 @@ const {
   TOKEN,
   COOKIE
 } = require( '../env.json' )
-// const {
-//   updateCookie,
-//   writeToErrorFile,
-//   writeToRespFile
-// } = require( '../exports' )
+const {
+  updateCookie,
+  writeToErrorFile,
+  writeToRespFile
+} = require( '../exports' )
 const {
   contentDisposition
 } = require( 'express/lib/utils' )
@@ -62,7 +62,7 @@ async function getVehiclesAndZones( data, token, cookie ) {
     console.log( 'Am datele in get zones' )
     try {
       // writeToRespFile(res.data)
-      // updateCookie( res.headers[ 'set-cookie' ][ 1 ] )
+      updateCookie( res.headers[ 'set-cookie' ][ 1 ] )
       const bikes = res.data.attributes.bikes
       console.log( `THIS IS THE VARIABLE D U FUCK` )
       console.log( res )
@@ -84,7 +84,7 @@ async function getVehiclesAndZones( data, token, cookie ) {
     console.log( `Ceva nu-i ok in get zones` )
     console.log( err )
     // writeToErrorFile(err)
-    // updateCookie( err.response.headers[ 'set-cookie' ][ 0 ] )
+    updateCookie( err.response.headers[ 'set-cookie' ][ 0 ] )
   }
 }
 
