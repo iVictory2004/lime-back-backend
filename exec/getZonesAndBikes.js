@@ -12,11 +12,11 @@ const {
   TOKEN,
   COOKIE
 } = require( '../env.json' )
-const {
-  updateCookie,
-  writeToErrorFile,
-  writeToRespFile
-} = require( '../exports' )
+// const {
+//   updateCookie,
+//   writeToErrorFile,
+//   writeToRespFile
+// } = require( '../exports' )
 const {
   contentDisposition
 } = require( 'express/lib/utils' )
@@ -46,9 +46,7 @@ async function getVehiclesAndZones( data, token, cookie ) {
       // updateCookie( res.headers[ 'set-cookie' ][ 1 ] )
       const bikes = res.data.data.attributes.bikes
       sortare( bikes, data.user_latitude, data.user_longitude )
-      return new Promise( resolve => {
-        resolve( bikes )
-      } )
+      return bikes
     } catch ( e ) {
       console.log( `eroare in get zones la sortare sau scriere in fiesiere`, e )
     }
